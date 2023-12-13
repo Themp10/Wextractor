@@ -4,6 +4,15 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
+def getTel(arr):
+    if (len(arr)==0):
+        return "pas de tel"
+    return arr[1]
+
+def writeLog(text,type):
+    file1 = open("log.txt", type)
+    file1.write(text+" \n")
+    file1.close()
 
 def extract_data_from_url(url,string,ou):
     headers = {
@@ -24,7 +33,7 @@ def extract_data_from_url(url,string,ou):
         print(tel_href)
         tel="Pas de tel"
         if tel_href is not None:
-            tel=tel_href['href']
+            tel=getTel(tel_href['href'].split(":"))
     
         info={
             "name":name,
@@ -32,6 +41,7 @@ def extract_data_from_url(url,string,ou):
             "metier":string,
             "Ville":ou
         }
+        writeLog(name+";"+tel+";"+string+";"+ou,"a")
         return info
     else:
         print(f"Error: {response.status_code}")
@@ -90,52 +100,51 @@ def get_data(string, ou, page):
 
 #     html_content += "</ul>"
 #     return html_content
-@app.route('/')
+@app.route('/oo')
 def home():
     return render_template('index.html')
 
-@app.route('/search', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def search():
-    if requests.method == 'GET':
-        # Get the values from the form
-        strings = request.form['strings'].split('\n')
-        ous = request.form['ous'].split('\n')
+    # if request.method == 'GET':
+    #     # Get the values from the form
+    #     strings = requests.form['strings'].split('\n')
+    #     ous = requests.form['ous'].split('\n')
 
-        # Redirect to the download page with the parameters
-        return redirect(url_for('download_excel', strings='\n'.join(strings), ous='\n'.join(ous)))
+    #     # Redirect to the download page with the parameters
+    #     return redirect(url_for('download_excel', strings='\n'.join(strings), ous='\n'.join(ous)))
 
-    # Render the search page
+    # # Render the search page
     return render_template('search.html')
 
 
 
 @app.route('/download', methods=['GET', 'POST'])
 def download_excel():
-    # strings = ["veterinaire"]
-    # ous = ["Casablanca"]
+    writeLog("Nom;Tel;Metier;Ville","w")
     strings = request.form['strings'].split('\n')
     ous = request.form['ous'].split('\n')
-    # Create a list to store your data
+
     data_list = []
 
     for string in strings:
         for ou in ous:
             page = 1
-            while page < 5:
+            while page < 3:
                 data = get_data(string, ou, page)
                 if not data:
                     break
                 data_list.extend(data)
-                page += 1  # Increment the page number for the next request
+                page += 1  # passer à la page suivante
 
     # Create a DataFrame from the data list
     df = pd.DataFrame(data_list)
    # Save the Excel file to a temporary location
-    excel_filename = 'scraping_results.xlsx'
+    excel_filename = 'resultat.xlsx'
     df.to_excel(excel_filename, index=False)
 
     # Return the Excel file for download
-    return send_file(excel_filename, as_attachment=True, download_name='scraping_results.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    return send_file(excel_filename, as_attachment=True, download_name='resultat.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
