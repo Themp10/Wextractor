@@ -1,40 +1,9 @@
 Nom;Tel;Metier;Ville 
-Abou El Qassime Houda;05 23 31 39 13;dentiste;Mohammedia 
-Adnane Mariyama;05 21 00 97 55;dentiste;Mohammedia 
-Ait Oulahyane Bouchra;05 23 32 45 97;dentiste;Mohammedia 
-Allali Rachid;05 23 28 51 71;dentiste;Mohammedia 
-Amechmachi Hasnaa;05 23 30 46 56;dentiste;Mohammedia 
-Amine Houda;05 23 30 01 05;dentiste;Mohammedia 
-Arbi Selma;05 23 30 06 89;dentiste;Mohammedia 
-Arhzouni Mohamed;05 23 28 04 77;dentiste;Mohammedia 
-Barkate Hanane;05 23 28 44 34;dentiste;Mohammedia 
-Bechar Laïlah;05 23 31 07 07;dentiste;Mohammedia 
-Bekkali Hakima;05 23 32 18 81;dentiste;Mohammedia 
-Belhadi Abdellatif;05 23 27 31 76;dentiste;Mohammedia 
-Belkdim Meriem;05 23 28 76 67;dentiste;Mohammedia 
-Belkdime Leïla;05 23 32 37 36;dentiste;Mohammedia 
-Bellamlih Zineb;05 23 32 77 76;dentiste;Mohammedia 
-Benhaioun Safâa;05 23 30 08 91;dentiste;Mohammedia 
-Benhaïda Asmae;05 23 28 11 98;dentiste;Mohammedia 
-Benlaghlid Lalla Achouak;05 23 32 57 40;dentiste;Mohammedia 
-Berrabane Souhail;05 23 28 23 24;dentiste;Mohammedia 
-Afrah Mounir;Pas de tel;banque;Mohammedia 
-Attijariwafa bank (ag. C.a. Mohammedia Hassan II);05 23 32 53 44;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia Al Falah);05 23 31 86 90;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia Anfa);05 23 28 19 14;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia av des Far);05 23 31 86 76;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia ElAlia);05 23 30 27 02;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia ElOuafa);05 23 31 64 39;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia Expansion);05 23 32 90 13;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia Hay AlHouria);05 23 32 64 84;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia Marjane);05 23 32 99 31;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia Moukawama);05 23 28 59 34;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia Pont Blondin);05 23 31 86 95;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia Riad);05 23 28 90 40;banque;Mohammedia 
-Attijariwafa bank (ag. Mohammedia);05 23 32 37 55;banque;Mohammedia 
-Attijariwafa bank (ag.Mohammedia Derb Marrakech);05 23 30 61 70;banque;Mohammedia 
-Banque Marocaine du Commerce Extérieur( Bmce (ag. Mohammedia bd Med. VI) );05 23 28 90 50;banque;Mohammedia 
-Banque Marocaine du Commerce Extérieur( Bmce (ag.Mohammedia Riad Salam) );05 23 28 90 60;banque;Mohammedia 
-Banque Marocaine du Commerce Extérieur( Bmce (ag. Mohammedia AlWafaa) );05 23 30 61 80;banque;Mohammedia 
-Banque Marocaine du Commerce Extérieur( Bmce (ag. Mohammedia derb Marrakech );05 23 31 96 70;banque;Mohammedia 
-Banque Marocaine du Commerce Extérieur( Bmce (ag. Mohammedia Ville) );05 23 31 84 34;banque;Mohammedia 
+Mekouar Ahmed;05 22 25 28 69;dentiste;casablanca 
+Sterimedical;05 22 89 71 89;dentiste;casablanca 
+A.k.i.;05 37 68 05 10;dentiste;rabat 
+Aalloula El Houssaine;05 37 57 17 61;dentiste;rabat 
+Banque Centrale Populaire (Bcp);05 22 20 25 33;banque;casablanca 
+Afges Formation Banque Finance Maroc Privé;Pas de tel;banque;casablanca 
+Afrah Arribat;05 37 20 04 86;banque;rabat 
+Afrah Arribat Himmi Frères( Afrah Arribat );Pas de tel;banque;rabat 

@@ -5,14 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
 </head>
+<style>
+    body{
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    *{
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    }
+    h1{
+        width: 100%;
+        background-color: #FFDD00;
+        height: 90px;
+        text-align: center;
+        line-height: 80px;
+    }
+    .form-bu{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+    }
+    .btn-bu{
+        cursor: pointer;
+        width: 90px;
+        height: 40px;
+        font-weight: bold;
+        color: white;
+        font-size: 15px;
+        background-color: #293ec6;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 0 rgba(0,0,0,0.25),
+                    0 4px 0 rgb(23, 53, 151),
+                    0 4px 6px rgba(0,0,0,0.45);
+    }
+    .btn-bu:hover {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.45);
+        transform: translateY(4px);     
+    }
+    .btn-bu:active {
+        background-color: #1e266c;   
+    }
+    
+    .btn-search{
+        cursor: pointer;
+
+        width: 90px;
+        height: 40px;
+        color: rgb(39, 39, 39);
+        font-weight: bold;
+        font-size: 15px;
+        background-color: #5cfa54;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 0 rgba(0,0,0,0.25),
+                    0 4px 0 rgb(95, 218, 73),
+                    0 4px 6px rgba(0,0,0,0.45);
+    }
+    .btn-search:hover {
+        box-shadow: 0 1px 2px rgba(0,0,0,0.45);
+        transform: translateY(4px);     
+    }
+    .btn-search:active {
+        background-color: #41d143;   
+    }
+    .text-area{
+        width: 150px;
+        height: 200px;
+    }
+    .container{
+        background-color: whitesmoke;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 50px;
+
+    }
+    .main-form{
+        background-color: white;
+        padding: 20px;
+        display: flex;
+        gap: 50px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 15px;
+    }
+    .input-groupe{
+        display: flex;
+        flex-direction: column;
+    }
+</style>
 <body>
-    <h1>Search</h1>
-    <form action="/download" method="POST">
-        <label for="strings">Array of Strings:</label>
-        <textarea id="strings" name="strings" rows="4" cols="50"></textarea><br>
-        <label for="ous">Array of Ous:</label>
-        <textarea id="ous" name="ous" rows="4" cols="50"></textarea><br>
-        <input type="submit" value="Search">
-    </form>
+    <h1>Page Jaunes Amélioré</h1>
+    <div class="container">
+        <!-- <form action="/download" method="POST" class="main-form"> -->
+        <form method="POST" class="main-form" id="main-form">
+            <div class="input-groupe">
+                <label for="strings">Métiers:</label>
+                <textarea id="strings" name="strings" rows="4" cols="50" class="text-area"></textarea><br>
+            </div>
+            <div class="input-groupe">
+                <label for="ous">Villes :</label>
+                <textarea id="ous" name="ous" rows="4" cols="50" class="text-area"></textarea><br>
+            </div>
+            <div class="input-groupe">
+                <label ipm="ous">Elément par métier :</label>
+                <input type="text" name="ipm" id="ipm" placeholder="100 max" pattern="[1-9]?[0-9]|100" title="Maximum 100 éléments par métier !" required>
+            </div>
+            <div class="btn-group">
+                <button type="button"  class="btn-search" onclick="setActionAndSubmit('download')">Télécharger</button>    
+                <button  type="button" class="btn-bu" onclick="setActionAndSubmit('getLog')">Récupérer</button>  
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <script>
+        function setActionAndSubmit(action) {
+            var form = document.getElementById('main-form');
+            form.action = '/' + action;
+            form.submit();
+        }
+    </script>
 </body>
 </html>
