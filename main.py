@@ -31,7 +31,7 @@ def get_data(string, ou, page):
     }
 
     response = requests.get(base_url, params=params)
-    echo response
+  
     if response.status_code == 200:
         # Parse the HTML content
         soup = BeautifulSoup(response.text, 'html.parser')
