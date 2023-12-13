@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, send_file,request
+from flask import Flask, render_template, send_file,request
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -50,7 +50,6 @@ def extract_data_from_url(url,string,ou,ipm):
             "Ville":ou
         }
         writeLog(name+";"+tel+";"+string+";"+ou,"a")
-        print("ohohohohoohoh",ipm_counter)
         ipm_counter+=1
         if (ipm==ipm_counter):
             ipm_counter=0
@@ -143,4 +142,4 @@ def download_excel():
 
 #fonction principale 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000,debug=True)

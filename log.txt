@@ -1,9 +1,4 @@
 Nom;Tel;Metier;Ville 
-Mekouar Ahmed;05 22 25 28 69;dentiste;casablanca 
-Sterimedical;05 22 89 71 89;dentiste;casablanca 
-A.k.i.;05 37 68 05 10;dentiste;rabat 
-Aalloula El Houssaine;05 37 57 17 61;dentiste;rabat 
-Banque Centrale Populaire (Bcp);05 22 20 25 33;banque;casablanca 
-Afges Formation Banque Finance Maroc Privé;Pas de tel;banque;casablanca 
-Afrah Arribat;05 37 20 04 86;banque;rabat 
-Afrah Arribat Himmi Frères( Afrah Arribat );Pas de tel;banque;rabat 
+ Pharmacie du Coin;05 22 58 31 25;Pharmacies;casablanca 
+ Pharmacie Résidence Enasser;05 20 28 61 10;Pharmacies;casablanca 
+A Ta Santé Distribution;05 22 30 83 85;Pharmacies;casablanca 

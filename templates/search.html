@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
+    <title>Page Jaunes Améliorées</title>
 </head>
 <style>
     body{
@@ -99,7 +99,7 @@
     }
 </style>
 <body>
-    <h1>Page Jaunes Amélioré</h1>
+    <h1>Page Jaunes Améliorées</h1>
     <div class="container">
         <!-- <form action="/download" method="POST" class="main-form"> -->
         <form method="POST" class="main-form" id="main-form">
@@ -113,13 +113,16 @@
             </div>
             <div class="input-groupe">
                 <label ipm="ous">Elément par métier :</label>
-                <input type="text" name="ipm" id="ipm" placeholder="100 max" pattern="[1-9]?[0-9]|100" title="Maximum 100 éléments par métier !" required>
+                <input type="text" name="ipm" id="ipm" placeholder="100 max" pattern="[1-9]?[0-9]|100" title="Maximum 100 éléments par métier !" value="0" required>
             </div>
             <div class="btn-group">
-                <button type="button"  class="btn-search" onclick="setActionAndSubmit('download')">Télécharger</button>    
-                <button  type="button" class="btn-bu" onclick="setActionAndSubmit('getLog')">Récupérer</button>  
+                <button class="btn-search" onclick="setActionAndSubmit('download')">Télécharger</button>    
+                <button class="btn-bu" onclick="setActionAndSubmit('getLog')">Récupérer</button>  
             </div>
-
+            <div class="input-groupe" >
+                <label for="output" hidden>Non trouvés :</label>
+                <textarea id="output" name="output" rows="4" cols="50" class="text-area" hidden></textarea><br>
+            </div>
         </form>
 
     </div>
@@ -128,7 +131,11 @@
     <script>
         function setActionAndSubmit(action) {
             var form = document.getElementById('main-form');
+            if(document.getElementById('ipm').value==""){
+                return
+            }
             form.action = '/' + action;
+            event.preventDefault();
             form.submit();
         }
     </script>
