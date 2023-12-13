@@ -1,21 +1,38 @@
-from flask import Flask
+from flask import Flask, render_template, redirect, url_for, send_file,request
 import requests
+import pandas as pd
 from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
-def extract_data_from_url(url):
-    response = requests.get(url)
+def extract_data_from_url(url,string,ou):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+        'Referer': 'https://www.telecontact.ma/'
+        # Add more headers if needed
+    }
+
+    response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
         # Parse the HTML content of the detailed page
         detailed_soup = BeautifulSoup(response.text, 'html.parser')
-
-        # Extract information based on specific tags, classes, etc.
-        name = detailed_soup.find('span', class_='name_class').text
-        phone_number = detailed_soup.find('span', class_='phone_class').text
-
-        return f"Name: {name}, Phone Number: {phone_number}"
+        name_strong = detailed_soup.select_one('.searching-result h1 strong')
+        name=name_strong.text
+        
+        tel_href = detailed_soup.select_one('.btns button a')
+        print(tel_href)
+        tel="Pas de tel"
+        if tel_href is not None:
+            tel=tel_href['href']
+    
+        info={
+            "name":name,
+            "tel" :tel,
+            "metier":string,
+            "Ville":ou
+        }
+        return info
     else:
         print(f"Error: {response.status_code}")
         return None
@@ -29,48 +46,96 @@ def get_data(string, ou, page):
         'nxs': 'process',
         'page': page
     }
-
-    response = requests.get(base_url, params=params)
-  
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+        'Referer': 'https://www.telecontact.ma/'
+        # Add more headers if needed
+    }
+    response = requests.get(base_url, params=params, headers=headers)
+    
     if response.status_code == 200:
         # Parse the HTML content
         soup = BeautifulSoup(response.text, 'html.parser')
-
+        
         # Extracting href from a div with a specific class (replace 'your_div_class' with the actual class)
         href_elements = soup.select('.result-search-item-non-annonceur-description-title h2 a')
         results = []
         for href_element in href_elements:
             href = href_element['href']
-
-            # data = extract_data_from_url(href)
-            # if data:
-            #     results.append(data)
+            data = extract_data_from_url(href,string, ou)
+            if data:
+                results.append(data)
         return results
     else:
         print(f"Error: {response.status_code}")
         return None
 
-@app.route('/')
-def index():
-    strings = ["veterinaire"]
-    ous = ["Casablanca"]
+# @app.route('/')
+# def index():
+#     strings = ["veterinaire"]
+#     ous = ["Casablanca"]
 
-    html_content = "<h1>Scraping Results</h1><ul>"
+#     html_content = "<h1>Scraping Results</h1><ul>"
+
+#     for string in strings:
+#         for ou in ous:
+#             page = 1
+#             while page<2:
+#                 data = get_data(string, ou, page)
+#                 if not data:
+#                     break
+#                 for item in data:
+#                     html_content += f"<li>{item['name']} , {item['tel']}</li>"
+#                 page += 1  # Increment the page number for the next request
+
+#     html_content += "</ul>"
+#     return html_content
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if requests.method == 'GET':
+        # Get the values from the form
+        strings = request.form['strings'].split('\n')
+        ous = request.form['ous'].split('\n')
+
+        # Redirect to the download page with the parameters
+        return redirect(url_for('download_excel', strings='\n'.join(strings), ous='\n'.join(ous)))
+
+    # Render the search page
+    return render_template('search.html')
+
+
+
+@app.route('/download', methods=['GET', 'POST'])
+def download_excel():
+    # strings = ["veterinaire"]
+    # ous = ["Casablanca"]
+    strings = request.form['strings'].split('\n')
+    ous = request.form['ous'].split('\n')
+    # Create a list to store your data
+    data_list = []
 
     for string in strings:
         for ou in ous:
             page = 1
-            while page<5:
+            while page < 5:
                 data = get_data(string, ou, page)
-                print("data : ",data)
                 if not data:
                     break
-                for item in data:
-                    html_content += f"<li>{item}</li>"
+                data_list.extend(data)
                 page += 1  # Increment the page number for the next request
 
-    html_content += "</ul>"
-    return html_content
+    # Create a DataFrame from the data list
+    df = pd.DataFrame(data_list)
+   # Save the Excel file to a temporary location
+    excel_filename = 'scraping_results.xlsx'
+    df.to_excel(excel_filename, index=False)
+
+    # Return the Excel file for download
+    return send_file(excel_filename, as_attachment=True, download_name='scraping_results.xlsx', mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
