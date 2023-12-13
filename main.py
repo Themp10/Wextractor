@@ -94,6 +94,11 @@ def get_data(string, ou, ipm,page):
         print(f"Error: {response.status_code}")
         return None
 
+
+
+
+
+
 # route principale pour acceder a la recherche
 @app.route('/', methods=['GET', 'POST'])
 def search():
